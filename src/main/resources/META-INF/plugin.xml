@@ -1,0 +1,42 @@
+<idea-plugin version="2">
+  <id>com.your.company.unique.plugin.id</id>
+  <name>Plugin display name here</name>
+  <version>1.0</version>
+  <vendor email="yahpeycoy0403@gmail.com"
+          url="https://github.com/konifar/android-strings-search-plugin">
+    konifar
+  </vendor>
+
+  <description>
+    <![CDATA[
+      Android Studio & IntelliJ Plugin for strings.xml. This plugin makes easier to search text in strings resources.
+    ]]>
+  </description>
+
+  <change-notes>
+    <![CDATA[
+      0.1.0: First version released.
+    ]]>
+  </change-notes>
+
+  <idea-version since-build="141.0"/>
+
+  <depends>com.intellij.modules.java</depends>
+  <depends>org.jetbrains.android</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+  </extensions>
+
+  <actions>
+    <action id="SearchStringsAction"
+            class="main.java.com.konifar.stringssearch.SearchStringsAction"
+            text="Search strings"
+            description="Incremental search text in strings.xml"
+            icon="/menu_icon.png">
+      <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="meta alt S"/>
+    </action>
+  </actions>
+
+</idea-plugin>
