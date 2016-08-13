@@ -1,4 +1,4 @@
-package main.java.com.konifar.stringssearch.utils;
+package main.java.com.konifar.stringssearch;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.MessageType;
