@@ -9,8 +9,11 @@ public final class PluralStringElement extends AbstractStringElement {
 
     private final LinkedList<QuantityStringElement> quantities = new LinkedList<QuantityStringElement>();
 
-    public PluralStringElement(String name, List<QuantityStringElement> quantities) {
+    private final String parentDirName;
+
+    public PluralStringElement(String name, List<QuantityStringElement> quantities, String parentDirName) {
         this.name = name;
+        this.parentDirName = parentDirName;
         this.quantities.addAll(quantities);
     }
 
@@ -37,6 +40,11 @@ public final class PluralStringElement extends AbstractStringElement {
         }
 
         return builder.toString();
+    }
+
+    @Override
+    public String getParentDirName() {
+        return parentDirName;
     }
 
 }

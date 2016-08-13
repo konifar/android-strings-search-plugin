@@ -10,4 +10,6 @@ public interface StringElement extends NavigationItem {
 
     String getValue();
 
+    String getParentDirName();
+
 }

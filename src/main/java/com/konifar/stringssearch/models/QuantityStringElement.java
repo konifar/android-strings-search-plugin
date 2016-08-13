@@ -6,9 +6,12 @@ public final class QuantityStringElement extends AbstractStringElement {
 
     private final String value;
 
-    public QuantityStringElement(String quantity, String value) {
+    private final String parentDirName;
+
+    public QuantityStringElement(String quantity, String value, String parentDirName) {
         this.quantity = quantity;
         this.value = value;
+        this.parentDirName = parentDirName;
     }
 
     @Override
@@ -24,6 +27,11 @@ public final class QuantityStringElement extends AbstractStringElement {
     @Override
     public String getValue() {
         return value;
+    }
+
+    @Override
+    public String getParentDirName() {
+        return parentDirName;
     }
 
 }

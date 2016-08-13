@@ -40,7 +40,7 @@ public class SearchStringsAction extends GotoActionBase implements DumbAware {
         };
 
         SearchStringItemProvider provider = new SearchStringItemProvider(project, getPsiContext(e));
-        showNavigationPopup(e, searchStringModel, callback, "strings matching pattern", true, false, provider);
+        showNavigationPopup(e, searchStringModel, callback, "strings matching pattern", true, true, provider);
     }
 
 }

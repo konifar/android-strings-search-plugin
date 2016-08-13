@@ -6,9 +6,12 @@ public final class NormalStringElement extends AbstractStringElement {
 
     private final String value;
 
-    public NormalStringElement(String name, String value) {
+    private final String parentDirName;
+
+    public NormalStringElement(String name, String value, String parentDirName) {
         this.value = value;
         this.name = name;
+        this.parentDirName = parentDirName;
     }
 
     @Override
@@ -24,6 +27,11 @@ public final class NormalStringElement extends AbstractStringElement {
     @Override
     public String getValue() {
         return value;
+    }
+
+    @Override
+    public String getParentDirName() {
+        return parentDirName;
     }
 
 }

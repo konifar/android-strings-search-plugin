@@ -1,8 +1,6 @@
 package main.java.com.konifar.stringssearch.search;
 
-import com.intellij.ide.ui.UISettings;
-import com.intellij.ide.util.ModuleRendererFactory;
-import com.intellij.ide.util.PlatformModuleRendererFactory;
+import com.intellij.icons.AllIcons;
 import com.intellij.navigation.ColoredItemPresentation;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
@@ -93,15 +91,7 @@ final class StringElementListCellRenderer extends JPanel implements ListCellRend
 
     @Nullable
     private DefaultListCellRenderer getRightCellRenderer(final Object value) {
-        if (UISettings.getInstance().SHOW_ICONS_IN_QUICK_NAVIGATION) {
-            final DefaultListCellRenderer renderer = ModuleRendererFactory.findInstance(value).getModuleRenderer();
-            if (renderer instanceof PlatformModuleRendererFactory.PlatformModuleRenderer) {
-                // it won't display any new information
-                return null;
-            }
-            return renderer;
-        }
-        return null;
+        return new RightCellRenderer();
     }
 
     private class LeftRenderer extends ColoredListCellRenderer {
@@ -237,4 +227,35 @@ final class StringElementListCellRenderer extends JPanel implements ListCellRend
         return Iconable.ICON_FLAG_READ_STATUS;
     }
 
+    private class RightCellRenderer extends DefaultListCellRenderer {
+
+        RightCellRenderer() {
+            super();
+        }
+
+        public Component getListCellRendererComponent(JList list, Object value, int index,
+                                                      boolean isSelected, boolean cellHasFocus) {
+            Component listCellRendererComponent = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            customizeCellRenderer(value, isSelected);
+            return listCellRendererComponent;
+        }
+
+        private void customizeCellRenderer(Object value, boolean selected) {
+            if (value instanceof StringElement) {
+                StringElement element = (StringElement) value;
+
+                setIcon(AllIcons.Modules.SourceFolder);
+                setText(element.getParentDirName());
+
+                setBorder(BorderFactory.createEmptyBorder(0, 0, 0, UIUtil.getListCellHPadding()));
+                setHorizontalTextPosition(2);
+                setBackground(selected ? UIUtil.getListSelectionBackground() : UIUtil.getListBackground());
+                setForeground(selected ? UIUtil.getListSelectionForeground() : UIUtil.getInactiveTextColor());
+
+                if (UIUtil.isUnderNimbusLookAndFeel()) {
+                    setOpaque(false);
+                }
+            }
+        }
+    }
 }

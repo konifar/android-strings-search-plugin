@@ -4,6 +4,7 @@ import com.intellij.ide.util.gotoByName.ChooseByNameFilter;
 import com.intellij.ide.util.gotoByName.ChooseByNamePopup;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.JDOMUtil;
+import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -49,6 +50,16 @@ public final class SearchStringFilterFactory {
 
         private static final String STRINGS_XML = "strings.xml";
 
+        private static final String TAG_RESOURCES = "resources";
+
+        private static final String TAG_PLURALS = "plurals";
+
+        private static final String TAG_ITEM = "item";
+
+        private static final String TAG_QUANTITY = "quantity";
+
+        private static final String TAG_NAME = "name";
+
         private SearchStringFilter(ChooseByNamePopup popup, SearchStringModel model, Project project) {
             super(popup, model, SearchStringConfiguration.getInstance(project), project);
         }
@@ -74,43 +85,44 @@ public final class SearchStringFilterFactory {
 
             PsiFile[] files = FilenameIndex.getFilesByName(project, STRINGS_XML, GlobalSearchScope.projectScope(project));
 
-            try {
-                PsiFile file = files[0];
-                if (file != null) {
-                    InputStream is = new ByteArrayInputStream(file.getText().getBytes());
+            for (PsiFile psiFile : files) {
+                if (psiFile != null) {
+                    PsiDirectory dir = psiFile.getParent();
+                    String parentDirName = dir != null ? dir.getName() : "";
 
-                    Document doc = JDOMUtil.loadDocument(is);
-                    Element root = doc.getRootElement();
-                    Element resources = root.getChild("resources");
-                    if (resources != null) root = resources;
+                    try {
+                        InputStream is = new ByteArrayInputStream(psiFile.getText().getBytes());
 
-                    List<Element> elements = root.getChildren();
-                    for (Element element : elements) {
-                        if ("plurals".equals(element.getName())) {
-                            List<QuantityStringElement> quantities = new LinkedList<QuantityStringElement>();
-                            List<Element> items = element.getChildren("item");
-                            for (Element item : items) {
-                                String key = item.getAttributeValue("quantity");
-                                String value = item.getText();
-                                quantities.add(new QuantityStringElement(key, value));
+                        Document doc = JDOMUtil.loadDocument(is);
+                        Element root = doc.getRootElement();
+                        Element resources = root.getChild(TAG_RESOURCES);
+                        if (resources != null) root = resources;
+
+                        List<Element> elements = root.getChildren();
+                        for (Element element : elements) {
+                            if (TAG_PLURALS.equals(element.getName())) {
+                                List<QuantityStringElement> quantities = new LinkedList<QuantityStringElement>();
+                                List<Element> items = element.getChildren(TAG_ITEM);
+                                for (Element item : items) {
+                                    String key = item.getAttributeValue(TAG_QUANTITY);
+                                    String value = item.getText();
+                                    quantities.add(new QuantityStringElement(key, value, parentDirName));
+                                }
+                                result.add(new PluralStringElement(element.getAttributeValue(TAG_NAME), quantities, parentDirName));
+                            } else {
+                                String key = element.getAttributeValue(TAG_NAME);
+                                String value = element.getText();
+                                result.add(new NormalStringElement(key, value, parentDirName));
                             }
-                            result.add(new PluralStringElement(element.getAttributeValue("name"), quantities));
-                        } else {
-                            String key = element.getAttributeValue("name");
-                            String value = element.getText();
-                            result.add(new NormalStringElement(key, value));
                         }
+                    } catch (JDOMException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                 }
-            } catch (JDOMException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-
             return result;
         }
-
     }
-
 }
