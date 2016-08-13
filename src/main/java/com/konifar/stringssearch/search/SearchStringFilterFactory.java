@@ -27,15 +27,10 @@ import java.util.List;
 
 public final class SearchStringFilterFactory {
 
-    private static SearchStringFilterFactory INSTANCE;
-
     private Project project;
 
     public static SearchStringFilterFactory get(Project project) {
-        if (INSTANCE == null) {
-            INSTANCE = new SearchStringFilterFactory(project);
-        }
-        return INSTANCE;
+        return new SearchStringFilterFactory(project);
     }
 
     private SearchStringFilterFactory(Project project) {

@@ -32,13 +32,12 @@ public class SearchStringItemProvider extends DefaultChooseByNameItemProvider {
         if (elements != null) {
             for (StringElement element : elements) {
                 String value = element.getValue();
-                if (value != null && value.contains(pattern) && consumer.process(element)) {
-                    return true;
+                if (value.contains(pattern) && !consumer.process(element)) {
+                    return false;
                 }
             }
         }
 
         return false;
     }
-
 }
