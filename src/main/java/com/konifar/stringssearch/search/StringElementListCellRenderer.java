@@ -36,7 +36,7 @@ final class StringElementListCellRenderer extends JPanel implements ListCellRend
 
     private Project project;
 
-    private int maxSize;
+    private int maxWidth;
 
     private Matcher matcher;
 
@@ -47,7 +47,7 @@ final class StringElementListCellRenderer extends JPanel implements ListCellRend
     StringElementListCellRenderer(Project project, int maxSize) {
         super(new BorderLayout());
         this.project = project;
-        this.maxSize = maxSize;
+        this.maxWidth = maxSize;
     }
 
     private static Color getBackgroundColor(@Nullable Object value) {
@@ -168,17 +168,7 @@ final class StringElementListCellRenderer extends JPanel implements ListCellRend
 
     @Nullable
     protected String getContainerTextForLeftComponent(StringElement element, final String name) {
-        // TODO
-        return element.getValue();
-//        PsiFileSystemItem parent = element.getParent();
-//        final PsiDirectory psiDirectory = parent instanceof PsiDirectory ? (PsiDirectory)parent : null;
-//        if (psiDirectory == null) return null;
-//        final VirtualFile virtualFile = psiDirectory.getVirtualFile();
-//        final String relativePath = getRelativePath(virtualFile, element.getProject());
-//        if (relativePath == null) return "( " + File.separator + " )";
-//        String path =
-//                FilePathSplittingPolicy.SPLIT_BY_SEPARATOR.getOptimalTextForComponent(name + "          ", new File(relativePath), this, myMaxWidth);
-//        return "(" + path + ")";
+        return "(" + element.getName() + ")";
     }
 
     protected boolean customizeNonPsiElementLeftRenderer(ColoredListCellRenderer renderer,

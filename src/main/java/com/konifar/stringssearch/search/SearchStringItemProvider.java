@@ -38,7 +38,7 @@ public class SearchStringItemProvider extends DefaultChooseByNameItemProvider {
             }
         }
 
-        return super.filterElements(base, pattern, everywhere, indicator, consumer);
+        return false;
     }
 
 }
