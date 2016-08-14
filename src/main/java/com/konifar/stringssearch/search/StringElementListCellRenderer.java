@@ -7,7 +7,6 @@ import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.TextAttributes;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.popup.PopupChooserBuilder;
 import com.intellij.openapi.util.Iconable;
 import com.intellij.openapi.util.text.StringUtil;
@@ -32,24 +31,15 @@ import java.util.Comparator;
  */
 final class StringElementListCellRenderer extends JPanel implements ListCellRenderer, MatcherHolder {
 
-    private Project project;
-
     private int maxWidth;
 
     private Matcher matcher;
 
-    private int rightComponentWidth;
-
     private boolean focusBorderEnabled = true;
 
-    StringElementListCellRenderer(Project project, int maxSize) {
+    StringElementListCellRenderer(int maxWidth) {
         super(new BorderLayout());
-        this.project = project;
-        this.maxWidth = maxSize;
-    }
-
-    private static Color getBackgroundColor(@Nullable Object value) {
-        return UIUtil.getListBackground();
+        this.maxWidth = maxWidth;
     }
 
     @Override
@@ -61,19 +51,12 @@ final class StringElementListCellRenderer extends JPanel implements ListCellRend
     public Component getListCellRendererComponent(JList list, Object value, int index,
                                                   boolean isSelected, boolean cellHasFocus) {
         removeAll();
-        rightComponentWidth = 0;
-        DefaultListCellRenderer rightRenderer = getRightCellRenderer(value);
-        Component rightCellRendererComponent = null;
-        JPanel spacer = null;
-        if (rightRenderer != null) {
-            rightCellRendererComponent = rightRenderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-            add(rightCellRendererComponent, BorderLayout.EAST);
-            spacer = new JPanel();
-            spacer.setBorder(BorderFactory.createEmptyBorder(0, 2, 0, 2));
-            add(spacer, BorderLayout.CENTER);
-            rightComponentWidth = rightCellRendererComponent.getPreferredSize().width;
-            rightComponentWidth += spacer.getPreferredSize().width;
-        }
+        DefaultListCellRenderer rightRenderer = new RightCellRenderer();
+        Component rightCellRendererComponent = rightRenderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+        add(rightCellRendererComponent, BorderLayout.EAST);
+        JPanel spacer = new JPanel();
+        spacer.setBorder(BorderFactory.createEmptyBorder(0, 2, 0, 2));
+        add(spacer, BorderLayout.CENTER);
 
         ListCellRenderer leftRenderer = new LeftRenderer(null, matcher);
         final Component leftCellRendererComponent = leftRenderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
@@ -87,11 +70,6 @@ final class StringElementListCellRenderer extends JPanel implements ListCellRend
             spacer.setBackground(bg);
         }
         return this;
-    }
-
-    @Nullable
-    private DefaultListCellRenderer getRightCellRenderer(final Object value) {
-        return new RightCellRenderer();
     }
 
     private class LeftRenderer extends ColoredListCellRenderer {

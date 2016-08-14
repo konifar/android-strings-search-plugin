@@ -23,12 +23,12 @@ public final class SearchStringModel extends FilteringGotoByModel<StringElement>
 
     private final Project project;
 
-    private final int maxSize;
+    private final int maxWidth;
 
     public SearchStringModel(@NotNull Project project) {
         super(project, Extensions.getExtensions(ChooseByNameContributor.SYMBOL_EP_NAME));
         this.project = project;
-        maxSize = ApplicationManager.getApplication().isUnitTestMode()
+        maxWidth = ApplicationManager.getApplication().isUnitTestMode()
                 ? Integer.MAX_VALUE
                 : WindowManagerEx.getInstanceEx().getFrame(project).getSize().width;
     }
@@ -101,7 +101,7 @@ public final class SearchStringModel extends FilteringGotoByModel<StringElement>
 
     @Override
     public ListCellRenderer getListCellRenderer() {
-        return new StringElementListCellRenderer(project, maxSize);
+        return new StringElementListCellRenderer(maxWidth);
     }
 
     @Nullable
