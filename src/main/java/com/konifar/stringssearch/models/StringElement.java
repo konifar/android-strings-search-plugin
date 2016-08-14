@@ -1,6 +1,8 @@
 package main.java.com.konifar.stringssearch.models;
 
-public interface StringElement {
+import com.intellij.navigation.NavigationItem;
+
+public interface StringElement extends NavigationItem {
 
     String getName();
 
