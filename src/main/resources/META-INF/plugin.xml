@@ -1,4 +1,4 @@
-<idea-plugin version="2">
+<idea-plugin version="3">
     <id>com.konifar.stringssearch</id>
     <name>Android Strings Search Plugin</name>
     <version>1.0</version>
@@ -19,7 +19,7 @@
     ]]>
     </change-notes>
 
-    <idea-version since-build="141.0"/>
+    <idea-version since-build="141"/>
 
     <depends>com.intellij.modules.java</depends>
     <depends>org.jetbrains.android</depends>
