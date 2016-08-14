@@ -59,6 +59,9 @@ public final class SearchStringFilterFactory {
             super(popup, model, SearchStringConfiguration.getInstance(project), project);
         }
 
+        /*
+         * This method is called in super constructor.
+         */
         @Override
         @NotNull
         protected List<StringElement> getAllFilterValues() {

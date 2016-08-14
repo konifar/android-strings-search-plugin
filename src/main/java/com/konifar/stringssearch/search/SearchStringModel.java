@@ -21,34 +21,13 @@ import java.util.Collection;
  */
 public final class SearchStringModel extends FilteringGotoByModel<StringElement> implements DumbAware {
 
-    private final Project project;
-
     private final int maxWidth;
 
     public SearchStringModel(@NotNull Project project) {
         super(project, Extensions.getExtensions(ChooseByNameContributor.SYMBOL_EP_NAME));
-        this.project = project;
         maxWidth = ApplicationManager.getApplication().isUnitTestMode()
                 ? Integer.MAX_VALUE
                 : WindowManagerEx.getInstanceEx().getFrame(project).getSize().width;
-    }
-
-    @Override
-    protected boolean acceptItem(final NavigationItem item) {
-        if (item instanceof StringElement) {
-            final StringElement element = (StringElement) item;
-            final Collection<StringElement> elements = getFilterItems();
-            if (elements != null) {
-                for (StringElement e : elements) {
-                    if (e.getValue().equals(element.getValue())) {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        } else {
-            return super.acceptItem(item);
-        }
     }
 
     @Nullable
