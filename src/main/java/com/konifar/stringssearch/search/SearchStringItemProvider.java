@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 
-public class SearchStringItemProvider extends DefaultChooseByNameItemProvider {
+public final class SearchStringItemProvider extends DefaultChooseByNameItemProvider {
 
     public SearchStringItemProvider(@Nullable PsiElement context) {
         super(context);

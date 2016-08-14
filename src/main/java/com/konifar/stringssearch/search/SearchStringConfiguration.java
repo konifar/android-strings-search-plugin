@@ -17,7 +17,7 @@ import main.java.com.konifar.stringssearch.models.StringElement;
         name = "SearchStringConfiguration",
         storages = {@Storage(file = StoragePathMacros.WORKSPACE_FILE)}
 )
-public final class SearchStringConfiguration extends ChooseByNameFilterConfiguration<StringElement> {
+final class SearchStringConfiguration extends ChooseByNameFilterConfiguration<StringElement> {
 
     /**
      * Get configuration instance
@@ -25,7 +25,7 @@ public final class SearchStringConfiguration extends ChooseByNameFilterConfigura
      * @param project a project instance
      * @return a configuration instance
      */
-    public static SearchStringConfiguration getInstance(Project project) {
+    static SearchStringConfiguration getInstance(Project project) {
         return ServiceManager.getService(project, SearchStringConfiguration.class);
     }
 

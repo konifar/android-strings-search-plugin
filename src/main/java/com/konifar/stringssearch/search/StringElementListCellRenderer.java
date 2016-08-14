@@ -19,13 +19,10 @@ import java.awt.*;
  */
 final class StringElementListCellRenderer extends JPanel implements ListCellRenderer, MatcherHolder {
 
-    private int maxWidth;
-
     private Matcher matcher;
 
-    StringElementListCellRenderer(int maxWidth) {
+    StringElementListCellRenderer() {
         super(new BorderLayout());
-        this.maxWidth = maxWidth;
     }
 
     @Override

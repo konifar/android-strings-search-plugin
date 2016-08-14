@@ -6,7 +6,7 @@ import com.intellij.util.containers.FList;
 import com.intellij.util.text.Matcher;
 import org.jetbrains.annotations.NotNull;
 
-public class StringEllipsisPolicy {
+final class StringEllipsisPolicy {
 
     private static final int MAX_LENGTH = 100;
 
@@ -14,7 +14,7 @@ public class StringEllipsisPolicy {
 
     private static final String DOTS = "...";
 
-    public String ellipsizeText(@NotNull String text, Matcher matcher) {
+    String ellipsizeText(@NotNull String text, Matcher matcher) {
         final int textLength = text.length();
 
         if (textLength > MAX_LENGTH) {
