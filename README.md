@@ -3,6 +3,7 @@ Android Strings Search Plugin
 
 This plugin makes easy to search text in strings resources.
 
+![capture](https://github.com/konifar/android-strings-search-plugin/raw/master/art/demo.gif)
 
 #Installation
 
@@ -21,14 +22,7 @@ On Linux or Windows:
 3. Restart IntelliJ/Android Studio to activate plugin.
 
 ##Install IntelliJ Plugin Repositories
-
-On MAC:
-
-Go `Preference > Plugins > Browse repositories`, then search `strings search`.
-
-On Linux or Windows:
-
-Go `File > Settings... > IDE Settings > Plugins > Browse repositories`, then search `strings search`.
+Coming soon.
 
 
 #License
