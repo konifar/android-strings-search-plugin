@@ -16,11 +16,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class SearchStringsAction extends GotoActionBase implements DumbAware {
 
-    private Project project;
-
     @Override
     protected void gotoActionPerformed(AnActionEvent e) {
-        project = e.getData(CommonDataKeys.PROJECT);
+        final Project project = e.getData(CommonDataKeys.PROJECT);
         if (project == null) return;
 
         FeatureUsageTracker.getInstance().triggerFeatureUsed("navigation.popup.file");
@@ -39,7 +37,7 @@ public class SearchStringsAction extends GotoActionBase implements DumbAware {
             }
         };
 
-        SearchStringItemProvider provider = new SearchStringItemProvider(project, getPsiContext(e));
+        SearchStringItemProvider provider = new SearchStringItemProvider(getPsiContext(e));
         showNavigationPopup(e, searchStringModel, callback, "strings matching pattern", true, true, provider);
     }
 
