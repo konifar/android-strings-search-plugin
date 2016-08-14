@@ -3,7 +3,7 @@ package main.java.com.konifar.stringssearch.models;
 import java.util.LinkedList;
 import java.util.List;
 
-public final class PluralStringElement implements StringElement {
+public final class PluralStringElement extends AbstractStringElement {
 
     private String name;
 

@@ -3,12 +3,10 @@ package main.java.com.konifar.stringssearch.search;
 import com.intellij.ide.util.gotoByName.FilteringGotoByModel;
 import com.intellij.navigation.ChooseByNameContributor;
 import com.intellij.navigation.NavigationItem;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.extensions.Extensions;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.SystemInfo;
-import com.intellij.openapi.wm.ex.WindowManagerEx;
 import main.java.com.konifar.stringssearch.models.StringElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -21,13 +19,8 @@ import java.util.Collection;
  */
 public final class SearchStringModel extends FilteringGotoByModel<StringElement> implements DumbAware {
 
-    private final int maxWidth;
-
     public SearchStringModel(@NotNull Project project) {
         super(project, Extensions.getExtensions(ChooseByNameContributor.SYMBOL_EP_NAME));
-        maxWidth = ApplicationManager.getApplication().isUnitTestMode()
-                ? Integer.MAX_VALUE
-                : WindowManagerEx.getInstanceEx().getFrame(project).getSize().width;
     }
 
     @Nullable
@@ -80,7 +73,7 @@ public final class SearchStringModel extends FilteringGotoByModel<StringElement>
 
     @Override
     public ListCellRenderer getListCellRenderer() {
-        return new StringElementListCellRenderer(maxWidth);
+        return new StringElementListCellRenderer();
     }
 
     @Nullable

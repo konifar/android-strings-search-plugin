@@ -1,6 +1,6 @@
 package main.java.com.konifar.stringssearch.models;
 
-public final class NormalStringElement implements StringElement {
+public final class NormalStringElement extends AbstractStringElement {
 
     private final String name;
 

@@ -19,13 +19,10 @@ import java.awt.*;
  */
 final class StringElementListCellRenderer extends JPanel implements ListCellRenderer, MatcherHolder {
 
-    private int maxWidth;
-
     private Matcher matcher;
 
-    StringElementListCellRenderer(int maxWidth) {
+    StringElementListCellRenderer() {
         super(new BorderLayout());
-        this.maxWidth = maxWidth;
     }
 
     @Override
@@ -76,20 +73,19 @@ final class StringElementListCellRenderer extends JPanel implements ListCellRend
 
             if (value instanceof StringElement) {
                 StringElement element = (StringElement) value;
-                String name = element.getValue();
+                String stringKeyText = "(" + element.getName() + ")";
+                String text = new StringEllipsisPolicy().ellipsizeText(element.getValue(), matcher);
 
                 SimpleTextAttributes nameAttributes = new SimpleTextAttributes(Font.PLAIN, list.getForeground());
-                SpeedSearchUtil.appendColoredFragmentForMatcher(name, this, nameAttributes, matcher, bgColor, selected);
+                SpeedSearchUtil.appendColoredFragmentForMatcher(text, this, nameAttributes, matcher, bgColor, selected);
                 // TODO Change icon
                 setIcon(AndroidIcons.EmptyFlag);
 
-                String stringKeyText = "(" + element.getName() + ")";
                 append(" " + stringKeyText, new SimpleTextAttributes(Font.PLAIN, JBColor.GRAY));
             }
 
             setBackground(selected ? UIUtil.getListSelectionBackground() : bgColor);
         }
-
     }
 
     private class RightCellRenderer extends DefaultListCellRenderer {

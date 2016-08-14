@@ -1,6 +1,6 @@
 package main.java.com.konifar.stringssearch.models;
 
-public final class QuantityStringElement implements StringElement {
+public final class QuantityStringElement extends AbstractStringElement {
 
     private final String quantity;
 
