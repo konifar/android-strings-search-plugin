@@ -8,15 +8,15 @@ This plugin makes easy to search text in strings resources.
 
 ##Manually
 
-1. Download the [AndroidStringsSearchPlugin.jar]()
+1. Download the [android-strings-search-plugin.zip](https://github.com/konifar/android-strings-search-plugin/raw/master/android-strings-search-plugin.zip)
 
 On MAC:
 
-2. `Preference > Plugins > Install plugin from disk...` Select AndroidStringsSearchPlugin.jar above.
+2. `Preference > Plugins > Install plugin from disk...` Select android-strings-search-plugin.zip above.
 
 On Linux or Windows:
 
-2. `File > Settings... > IDE Settings > Plugins > Install plugin from disk...` Select AndroidStringsSearchPlugin.jar above.
+2. `File > Settings... > IDE Settings > Plugins > Install plugin from disk...` Select android-strings-search-plugin.zip above.
 
 3. Restart IntelliJ/Android Studio to activate plugin.
 
