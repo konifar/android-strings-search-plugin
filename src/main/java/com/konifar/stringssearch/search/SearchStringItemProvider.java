@@ -3,7 +3,6 @@ package main.java.com.konifar.stringssearch.search;
 import com.intellij.ide.util.gotoByName.ChooseByNameBase;
 import com.intellij.ide.util.gotoByName.DefaultChooseByNameItemProvider;
 import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.Processor;
 import main.java.com.konifar.stringssearch.models.StringElement;
@@ -14,11 +13,8 @@ import java.util.Collection;
 
 public class SearchStringItemProvider extends DefaultChooseByNameItemProvider {
 
-    private final Project project;
-
-    public SearchStringItemProvider(@NotNull Project project, @Nullable PsiElement context) {
+    public SearchStringItemProvider(@Nullable PsiElement context) {
         super(context);
-        this.project = project;
     }
 
     @Override
@@ -32,7 +28,12 @@ public class SearchStringItemProvider extends DefaultChooseByNameItemProvider {
         if (elements != null) {
             for (StringElement element : elements) {
                 String value = element.getValue();
-                if (value.contains(pattern) && !consumer.process(element)) {
+
+                if (value == null) {
+                    return false;
+                }
+
+                if (value.toLowerCase().contains(pattern.toLowerCase()) && !consumer.process(element)) {
                     return false;
                 }
             }
