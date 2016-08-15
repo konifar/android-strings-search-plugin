@@ -1,7 +1,7 @@
 Android Strings Search Plugin
 =============================================
 
-This plugin makes easy to search text in strings resources.
+This plugin makes it easy to search text in strings resources.
 
 ![capture](https://github.com/konifar/android-strings-search-plugin/raw/master/art/demo.gif)
 
