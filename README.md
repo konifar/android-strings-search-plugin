@@ -31,7 +31,7 @@ On Linux or Windows:
 
 Go `File > Settings... > IDE Settings > Plugins > Browse repositories`, then search `strings search`.
 
-![capture]()
+![capture](https://github.com/konifar/android-strings-search-plugin/raw/master/art/browse_repository.png)
 
 
 #License
