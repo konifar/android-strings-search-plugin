@@ -22,6 +22,7 @@ import javax.swing.*;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -80,10 +81,17 @@ public final class SearchStringFilterFactory {
 
         private List<StringElement> loadStringElements() {
             List<StringElement> result = new LinkedList<StringElement>();
-
-            PsiFile[] files = FilenameIndex.getFilesByName(project, STRINGS_XML, GlobalSearchScope.projectScope(project));
-
-            for (PsiFile psiFile : files) {
+            List<PsiFile> fileList = new ArrayList<PsiFile>();
+            String[] filenames = FilenameIndex.getAllFilenames(project);
+            for (String filename : filenames) {
+                if (filename.contains(STRINGS_XML)) {
+                    PsiFile[] files = FilenameIndex.getFilesByName(project, filename, GlobalSearchScope.projectScope(project));
+                    for (PsiFile file : files) {
+                        fileList.add(file);
+                    }
+                }
+            }
+            for (PsiFile psiFile : fileList) {
                 if (psiFile != null) {
                     PsiDirectory dir = psiFile.getParent();
                     String parentDirName = dir != null ? dir.getName() : "";
