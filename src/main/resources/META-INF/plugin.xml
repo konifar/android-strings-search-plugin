@@ -1,7 +1,7 @@
 <idea-plugin version="3">
     <id>com.konifar.stringssearch</id>
     <name>Android Strings Search Plugin</name>
-    <version>1.0</version>
+    <version>1.0.1</version>
     <vendor email="yahpeycoy0403@gmail.com"
             url="https://github.com/konifar/android-strings-search-plugin">
         konifar
